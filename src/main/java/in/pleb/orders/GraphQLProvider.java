@@ -65,19 +65,8 @@ public class GraphQLProvider {
         return schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
     }
 
-    /*private RuntimeWiring buildWiring() {
-        System.out.println("GraphQLProvider building schema");
-        return RuntimeWiring.newRuntimeWiring()
-                .type(newTypeWiring("Query")
-                        .dataFetcher("orderById", graphQLDataFetchers.getOrderByIdDataFetcher()))
-                .type(newTypeWiring("Order")
-                        .dataFetcher("item", graphQLDataFetchers.getItemDataFetcher()))
-                .type(newTypeWiring("Order")
-                        .dataFetcher("customer",graphQLDataFetchers.getCustomerDataFetcher())
-                .build();
-    }*/
-
     private RuntimeWiring buildWiring() {
+        //TODO: add separate code for query and Mutation
         return RuntimeWiring.newRuntimeWiring()
             .type(TypeRuntimeWiring.newTypeWiring("Query").dataFetcher("orderById", graphQLDataFetchers.getOrderByIdDataFetcher()))
             .type(TypeRuntimeWiring.newTypeWiring("Order").dataFetcher("item", graphQLDataFetchers.getItemDataFetcher()))

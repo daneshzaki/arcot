@@ -2,16 +2,21 @@ type Query {
   orderById(id: ID): Order 
 }
 
+type Mutation {
+  createOrder(  ordering: OrderInput) : String
+}
+
 type Order {
-  id: ID
+  id: ID!
   date: String
   amount: String
   customer: Customer
-  item: Item
+  item: [Item]
+  status:String
 }
 
 type Customer {
-  id: ID
+  id: ID!
   firstName: String
   lastName: String
   phone: String
@@ -20,8 +25,33 @@ type Customer {
 
 
 type Item {
-  id: ID
-  name: String
+  id: ID!
+  type: String
+  price: String
+  description: String
+}
+
+input OrderInput {
+  id: ID!
+  date: String
+  amount: String
+  customer: CustomerInput
+  item: [ItemInput]
+  status:String
+}
+
+input CustomerInput {
+  id: ID!
+  firstName: String
+  lastName: String
+  phone: String
+  address: String
+}
+
+
+input ItemInput {
+  id: ID!
+  type: String
   price: String
   description: String
 }
