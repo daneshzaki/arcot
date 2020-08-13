@@ -1,2 +1,2 @@
 # arcot
-GraphQL with Spring Boot 
+Sample Spring Boot microservices code to handle GraphQL queries and mutations
