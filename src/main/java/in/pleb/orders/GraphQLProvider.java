@@ -4,6 +4,8 @@ import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -66,11 +68,14 @@ public class GraphQLProvider {
     }
 
     private RuntimeWiring buildWiring() {
-        //TODO: add separate code for query and Mutation
+
         return RuntimeWiring.newRuntimeWiring()
             .type(TypeRuntimeWiring.newTypeWiring("Query").dataFetcher("orderById", graphQLDataFetchers.getOrderByIdDataFetcher()))
             .type(TypeRuntimeWiring.newTypeWiring("Order").dataFetcher("item", graphQLDataFetchers.getItemDataFetcher()))
             .type(TypeRuntimeWiring.newTypeWiring("Order").dataFetcher("customer", graphQLDataFetchers.getCustomerDataFetcher()))
+            .type(TypeRuntimeWiring.newTypeWiring("Mutation").dataFetcher("createOrder", graphQLDataFetchers.createOrderDataFetcher()))
+            //.type(TypeRuntimeWiring.newTypeWiring("Mutation").dataFetcher("updateOrder", graphQLDataFetchers.updateOrderDataFetcher()))
+            //.type(TypeRuntimeWiring.newTypeWiring("Mutation").dataFetcher("deleteOrder", graphQLDataFetchers.deleteOrderDataFetcher()))
             .build();
     }
 }

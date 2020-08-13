@@ -1,0 +1,42 @@
+mutation {
+  createOrder (
+    ordering:
+    {
+      id: "o20"
+      customerID:" c1"      
+      amount:"12.95"
+      date:"13/08/2020"
+      status:"placed"
+      item:
+      {
+        id:"i20"
+        type:"electronics"
+        price:"12.95"
+        description:"Dell AIO 2310"
+      }
+      
+    }
+  )
+}
+
+query{
+  orderById (id:"o20")
+  {
+    id
+    date
+    amount
+    customer
+    {
+      id
+    }
+    item
+    {
+      id
+      price
+      description
+      type
+    }
+    status
+  }
+ 
+}

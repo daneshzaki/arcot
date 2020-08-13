@@ -4,6 +4,7 @@ import in.pleb.orders.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Component;
 
 import graphql.schema.DataFetcher;
+import graphql.schema.DataFetchingEnvironment;
 
 @Component
 public class GraphQLDataFetchers {
@@ -128,5 +130,44 @@ public class GraphQLDataFetchers {
         }
 
         //TODO: add mutation datafetcher method
+        public DataFetcher createOrderDataFetcher()
+        {
+                System.out.println("GraphQLDataFetchers create order ");
+                return dataFetchingEnvironment -> {
+                        System.out.println("GraphQLDataFetchers create order dataFetchingEnvironment is "+dataFetchingEnvironment.getArguments().toString());
+                        LinkedHashMap  ordering = dataFetchingEnvironment.getArgument("ordering");
+                        System.out.println("GraphQLDataFetchers create order ordering = "+ordering.toString());
+                        System.out.println("GraphQLDataFetchers  create order order id = "+ordering.get("id"));
+                        String orderId = (String) ordering.get("id");
+                        System.out.println("GraphQLDataFetchers create order id = "+orderId);
+                        String customerId = (String) ordering.get("customerID");
+                        String orderDate = (String) ordering.get("date");
+                        String orderAmount = (String) ordering.get("amount");
+                        String orderStatus = (String) ordering.get("status");
+                        //TODO impl Item obj
+                        List orderingItems = new ArrayList(List.of(ordering.get("item")));
+                        
+                        orders.add(new Order(orderId, orderDate, orderAmount, customerId, orderStatus, orderingItems));
+
+                        return orders;
+
+                        
+
+                };
+        }
+
+        public DataFetcher updateOrderDataFetcher()
+        {
+                System.out.println("GraphQLDataFetchers update order ");
+                //TODO: add code to update fields for order id and change return type
+                return null;
+        }
+
+        public DataFetcher deleteOrderDataFetcher()
+        {
+                System.out.println("GraphQLDataFetchers delete order ");
+                //TODO: add code to delete  fields for order id and change return type
+                return null;
+        }
 
 }
