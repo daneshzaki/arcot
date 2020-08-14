@@ -4,6 +4,7 @@ import in.pleb.orders.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,28 +105,38 @@ public class GraphQLDataFetchers {
         public DataFetcher getCustomerDataFetcher() {
                 return dataFetchingEnvironment -> {
                         Order order = dataFetchingEnvironment.getSource();
-                        String customerId = order.getCustomerId();
+                        String customerId = order.getCustomerId().trim();
                         System.out.println("GraphQLdataFetchers get customer for " + customerId);
-                        return customers.stream().filter(customer -> customer.getId().equals(customerId)).findFirst()
-                                        .orElse(null);
+                        System.out.println("GraphQLdataFetchers customers are " + customers.toString());
+                        System.out.println("GraphQLdataFetchers customers contains id = " + customers.contains(customerId));
+                        for (Customer customer : customers) {
+                                System.out.println("GraphQLdataFetchers loop customer id " + customer.getId());            
+                                if (customer.getId().equals(customerId)) {
+                                    System.out.println("GraphQLdataFetchers customer match is " + customer.toString());            
+                                    return customer;                                    
+                                }
+                        }
+
+                        System.out.println("GraphQLdataFetchers no match returning null");
+                        return null;
                 };
         }
 
         public DataFetcher getItemDataFetcher() {
                 return dataFetchingEnvironment -> {
                         Order order = dataFetchingEnvironment.getSource();
-                        //String itemId = order.getItems();
-                        //System.out.println("GraphQLdataFetchers get item for " + itemId);
-                        //System.out.println("GraphQLdataFetchers fetched " + items.stream().filter(item -> item.getId().equals(itemId)).collect(Collectors.toList()));
-                        //return items.stream().filter(item -> item.getId().equals(itemId)).findFirst().orElse(null);
-                        //return items.stream().filter(item -> item.getId().equals(itemId)).collect(Collectors.toList());
-                        System.out.println("GraphQLDataFetchers order items = "+order.getItems().toString());
-                        return order.getItems();
+                        System.out.println("GraphQLDataFetchers order items = "+((List)((List)order.getItems()).get(0)).get(0).toString());
                         /**
                          * TODO: 
-                         * add code to add item with id only in Order
-                         * add code above to read id and get corresponding item
+                         * add code to retrieve multiple items from list
                          */
+                        //return items
+                        LinkedHashMap orderItems = (LinkedHashMap) ((List) ((List) order.getItems()).get(0)).get(0);
+                        System.out.println("GraphQLDataFetchers orderItems = "+orderItems.values());
+                        Item orderItem = new Item(orderItems.values());
+                        List orderItemList = new ArrayList();
+                        orderItemList.add(orderItem);
+                        return orderItemList;
                 };
         }
 

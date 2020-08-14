@@ -14,13 +14,14 @@ public class OrdersApplication {
 /**
  * 
  * TODO
- * add mutation - code in all classes
  * add query variables
- * try PropertyDataFetcher
+ * 
  * try subscriptions
- * try fragments
- * try unions 
- * change Map to nosql db
+ * try/read fragments
+ * try/read unions 
+ * --
+ * add mutation - code in all classes -- done
+ * try PropertyDataFetcher -- done -- PropertyDataFetcher is used to map a different name to a property e.g. id instead of orderID 
  * add multiple items to order -- done
  * change Strings data to POJO Classes -- done
  * check schema location -- done -- when graphql schema under resources changes, it is gen to bin/main

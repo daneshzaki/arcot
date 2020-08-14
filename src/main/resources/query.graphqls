@@ -3,7 +3,7 @@ mutation {
     ordering:
     {
       id: "o20"
-      customerID:" c1"      
+      customerID:"c1"      
       amount:"12.95"
       date:"13/08/2020"
       status:"placed"

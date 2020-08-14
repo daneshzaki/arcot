@@ -1,4 +1,7 @@
 package in.pleb.orders.model;
+
+import java.util.Collection;
+
 public class Item
 {
 
@@ -13,6 +16,16 @@ public class Item
         this.price = price;
     }
 
+    //utility constructor to populate obj from values
+    public Item (Object values)
+    {        
+        this.values = (Collection)values;
+        String[] valueArr = (String[]) values.toArray();
+        this.setId(valueArr[0]);
+        this.setPrice(valueArr[1]);
+        this.setType(valueArr[2]);
+        this.setDescription(valueArr[3]);
+    }
 
     public String getId() {
         return this.id;
@@ -49,5 +62,6 @@ public class Item
     private String type;
     private String description;
     private String price;
+    private Collection values;
 
 }
