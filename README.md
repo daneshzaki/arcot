@@ -54,3 +54,5 @@ mutation {
   )
 }
 </code>
+
+Check out the wiki for things learnt while writing the code
