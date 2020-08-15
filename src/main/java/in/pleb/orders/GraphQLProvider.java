@@ -24,6 +24,13 @@ import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import graphql.schema.idl.TypeRuntimeWiring;
 
+
+/**
+ * GraphQLProvider builds the GraphQL schema into an executable object, uses Data fetchers to 
+ * resolve the fields in the schema and provide a response.
+ * 
+ */
+
 @Component
 public class GraphQLProvider {
 
@@ -74,8 +81,6 @@ public class GraphQLProvider {
             .type(TypeRuntimeWiring.newTypeWiring("Order").dataFetcher("item", graphQLDataFetchers.getItemDataFetcher()))
             .type(TypeRuntimeWiring.newTypeWiring("Order").dataFetcher("customer", graphQLDataFetchers.getCustomerDataFetcher()))
             .type(TypeRuntimeWiring.newTypeWiring("Mutation").dataFetcher("createOrder", graphQLDataFetchers.createOrderDataFetcher()))
-            //.type(TypeRuntimeWiring.newTypeWiring("Mutation").dataFetcher("updateOrder", graphQLDataFetchers.updateOrderDataFetcher()))
-            //.type(TypeRuntimeWiring.newTypeWiring("Mutation").dataFetcher("deleteOrder", graphQLDataFetchers.deleteOrderDataFetcher()))
             .build();
     }
 }

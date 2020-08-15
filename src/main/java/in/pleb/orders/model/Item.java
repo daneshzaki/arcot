@@ -2,6 +2,10 @@ package in.pleb.orders.model;
 
 import java.util.Collection;
 
+/**
+ * Item is a POJO that holds the attributes of an ordered item used in the GraphQL schema
+ */
+
 public class Item
 {
 
@@ -14,17 +18,6 @@ public class Item
         this.type = type;
         this.description = description;
         this.price = price;
-    }
-
-    //utility constructor to populate obj from values
-    public Item (Object values)
-    {        
-        this.values = (Collection)values;
-        String[] valueArr = (String[]) values.toArray();
-        this.setId(valueArr[0]);
-        this.setPrice(valueArr[1]);
-        this.setType(valueArr[2]);
-        this.setDescription(valueArr[3]);
     }
 
     public String getId() {

@@ -20,7 +20,59 @@ mutation {
 }
 
 query{
-  orderById (id:"o20")
+  orderById (id:"o25")
+  {
+    id
+    date
+    amount
+    customer
+    {
+      id
+    }
+    item
+    {
+      id
+      price
+      description
+      type
+    }
+    status
+  }
+ 
+}
+
+mutation {
+  createOrder (
+    ordering:
+    {
+      id: "o25"
+      customerID:"c2"      
+      amount:"5.80"
+      date:"17/08/2020"
+      status:"shipped"
+      item:[      
+        {
+        id:"i03"
+        type:"condiments"
+        price:"4.95"
+        description:"Tea Ceylon"
+      }
+      
+      {
+        id:"i04"
+        type:"confectionery"
+        price:"0.95"
+        description:"Wriigleys gum"
+      }
+      
+]
+    }
+  )
+}
+
+
+query ($id:ID){
+  orderById (id: $id)
   {
     id
     date

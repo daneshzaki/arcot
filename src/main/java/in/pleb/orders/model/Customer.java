@@ -1,5 +1,9 @@
 package in.pleb.orders.model;
 
+/**
+ * Customer is a POJO that holds the attributes of a ordering customer used in the GraphQL schema
+ */
+
 public class Customer
 {
     public Customer(String id)

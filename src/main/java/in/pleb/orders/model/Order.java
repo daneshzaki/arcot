@@ -2,6 +2,10 @@ package in.pleb.orders.model;
 
 import java.util.List;
 
+/**
+ * Order is a POJO that holds the attributes of an order used in the GraphQL schema
+ */
+
 public class Order
 {
 
